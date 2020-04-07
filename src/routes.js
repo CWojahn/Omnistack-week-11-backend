@@ -31,28 +31,9 @@ routes.post(
 	ongController.create,
 );
 
-routes.get(
-	'/incidents',
-	celebrate({
-		[Segments.QUERY]: Joi.number(),
-	}),
-	incidentsController.index,
-);
+routes.get('/incidents', incidentsController.index);
 
-routes.post(
-	'/incidents',
-	celebrate({
-		[Segments.BODY]: Joi.object().keys({
-			title: Joi.string().required(),
-			description: Joi.string().required(),
-			value: Joi.number().required(),
-		}),
-		[Segments.HEADERS]: Joi.object({
-			authorization: Joi.string().required(),
-		}).unknown(),
-	}),
-	incidentsController.create,
-);
+routes.post('/incidents', incidentsController.create);
 
 routes.delete('/incidents/:id', incidentsController.delete);
 
